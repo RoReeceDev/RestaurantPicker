@@ -2,6 +2,17 @@
 var edits = document.getElementsByClassName("fa-edit");
 var trash = document.getElementsByClassName("fa-trash-o");
 const stars = document.querySelectorAll(".stars i")
+var pass = document.querySelector('.hide-pass')
+
+
+//hide user password
+
+pass.addEventListener('click', function(){
+  const password = document.querySelector('.password')
+
+  password.classList.toggle('hidden')
+})
+
 
 
 //Create randomize for random restuarant choice. I want it to be based on star rating 3-5
@@ -18,9 +29,9 @@ document.getElementById("randomizerBtn").addEventListener('click', function() {
 
         //adding data to the div!
         document.getElementById("randomizedResult").innerHTML = `
-          <h3>Randomized Dinner Option:</h3>
-          <p>Name: ${randomOption.name}</p>
-          <p>Rating: ${randomOption.star}</p>
+          <h3>Random Restaurant</h3>
+          <p>${randomOption.name}</p>
+          <p>Recent Rating: ${randomOption.star}</p>
         `;
       } else {
         //if no elements in data object, return alert to user
