@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>21 Savage Fan Site</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="page-header text-center">
+      <h1><span class="fa fa-anchor"></span> Welcome <%= user.local.email.split('@')[0] %>
+      </h1>
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+      <!-- LOCAL INFORMATION -->
+      <div class="col-sm-6">
+        <div class="well">
+          <h3><span class="fa fa-user"></span> Local</h3>
+
+          <% if (user.local.email) { %>
+            <p>
+              <strong>id</strong>: <%= user._id %><br>
+                <strong>email</strong>: <%= user.local.email %><br>
+                  <strong>password</strong>: <%= user.local.password %>
+            </p>
+
+            <a href="/unlink/local" class="btn btn-default">Unlink</a>
+            <% } else { %>
+              <a href="/connect/local" class="btn btn-default">Connect Local</a>
+              <% } %>
+
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h3>Messages</h3>
+        <section class="messages">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <article class="message">
+              <span class="name">
+                <%= messages[i].name %>
+              </span>
+              <p class="msg">
+                <%= messages[i].msg %>
+              </p>
+              <span class="type">
+                <%= messages[i].type %>
+              </span>
+              <span class="lastVisited">
+                <%= messages[i].lastVisited %>
+              </span>
+              
+              <!-- Ayman helped me with this code (start) -->
+
+              <div class="stars">
+                <i class="fa fa-star-o <%= messages[i].star >= 1 ? 'active': '' %>"
+                  data-id="<%= messages[i]._id %>"></i>
+                <i class="fa fa-star-o <%= messages[i].star >= 2 ? 'active': '' %>"
+                  data-id="<%= messages[i]._id %>"></i>
+                <i class="fa fa-star-o <%= messages[i].star >= 3 ? 'active': '' %>"
+                  data-id="<%= messages[i]._id %>"></i>
+                <i class="fa fa-star-o <%= messages[i].star >= 4 ? 'active': '' %>"
+                  data-id="<%= messages[i]._id %>"></i>
+                <i class="fa fa-star-o <%= messages[i].star >= 5 ? 'active': '' %>"
+                  data-id="<%= messages[i]._id %>"></i>
+              </div>
+
+              <!-- Ayman helped me with this code (end) -->
+
+              <span><i class="fa fa-edit" aria-hidden="true" data-id="<%= messages[i]._id %>"></i></span>
+              <span><i class="fa fa-trash-o" aria-hidden="true" data-id="<%= messages[i]._id %>"></i></span>
+
+              <div class="editing hidden" id="editing_<%= messages[i]._id %>">
+                <h2>Update a message</h2>
+                <% if (user.local.email) { %>
+                  <form action="/messages/update?_method=PUT" method="POST">
+                    <input type="hidden" name="id" value="<%= messages[i]._id %>">
+                    <input type="text" placeholder="restaurant" name="updateName">
+                    <textarea rows="5" cols="50" placeholder="Leave a quick review..." name="updateMsg"></textarea>
+                    <input type="date" name="updateLastVisited">
+                    <input type="text" placeholder="type of cuisine" name="updateType">
+
+
+                    <button type="submit">Submit</button>
+                  </form>
+              </div>
+              <% } %>
+            </article>
+            <% } %>
+        </section>
+
+        <h2>Add a message</h2>
+        <% if (user.local.email) { %>
+          <form action="/messages" method="POST">
+            <input type="text" placeholder="restaurant" name="name">
+            <textarea rows="5" cols="50" placeholder="Leave a quick review..." name="msg"></textarea>
+            <input type="date" name="lastVisited">
+            <input type="text" placeholder="type of cuisine" name="type">
+
+
+            <button type="submit">Submit</button>
+          </form>
+      </div>
+      <% } %>
+
+        <div>
+          <button id="randomizerBtn">Randomize Dinner Option</button>
+          <div id="randomizedResult"></div>
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>
