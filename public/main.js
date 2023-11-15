@@ -17,7 +17,7 @@ pass.addEventListener('click', function(){
 
 //Create randomize for random restuarant choice. I want it to be based on star rating 3-5
 document.getElementById("randomizerBtn").addEventListener('click', function() {
-  fetch('/messages/randomize')
+  fetch('/restaurants/randomize')
     .then(response => {
       if (response.ok) return response.json();
     })
@@ -50,7 +50,7 @@ Array.from(edits).forEach(function(element) {
   element.addEventListener('click', function(){
 
     //target the closest message box to the update icon that is clicked
-    const listItem = this.closest('.message')
+    const listItem = this.closest('.restaurant')
     const name = listItem.querySelector('.name').textContent
     const msg = listItem.querySelector('.msg').textContent
     const id = listItem.dataset.id
@@ -67,7 +67,7 @@ Array.from(edits).forEach(function(element) {
     editingDiv.classList.toggle('hidden')
 
 
-    fetch('messages/update', {
+    fetch('restaurants/update', {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -101,7 +101,7 @@ stars.forEach((star, index1) =>{
     const starArr = Array.from(this.parentNode.querySelectorAll('.stars i'))
     const starIndex = starArr.indexOf(this) 
     const id = this.dataset.id
-    fetch('messages', {
+    fetch('restaurants', {
       method: 'put',
       headers:{
         'Content-Type': 'application/json'
@@ -129,11 +129,11 @@ stars.forEach((star, index1) =>{
 
 Array.from(trash).forEach(function(element) {
   element.addEventListener('click', function(){
-    const listItem = this.closest('.message')
+    const listItem = this.closest('.restaurant')
     const name = listItem.querySelector('.name').textContent
     const id = this.dataset.id
 
-    fetch('messages', {
+    fetch('restaurants', {
       method: 'delete',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

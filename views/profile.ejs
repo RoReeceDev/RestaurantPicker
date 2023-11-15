@@ -56,7 +56,7 @@
         <div class="entry">
           <h2>Add A Restaurant</h2>
           <% if (user.local.email) { %>
-            <form action="/messages" method="POST">
+            <form action="/restaurants" method="POST">
               <div class="res-input">
       
                 <label for="name">Restaurant Name:</label>
@@ -75,67 +75,67 @@
         <% } %>
           <div class="res-list">
             <h2>Restaurants We've Tried</h2>
-            <section class="messages">
-              <% for(var i=0; i<messages.length; i++) {%>
-                <article class="message">
+            <section class="restaurants">
+              <% for(var i=0; i<restaurants.length; i++) {%>
+                <article class="restaurant">
                   <h4 class="name">
-                    <%= messages[i].name %>
+                    <%= restaurants[i].name %>
                       </h3>
 
                       <!-- Ayman helped me with this code (start) -->
 
                       <div class="stars">
-                        <i class="fa fa-star-o <%= messages[i].star >= 1 ? 'active': '' %>"
-                          data-id="<%= messages[i]._id %>"></i>
-                        <i class="fa fa-star-o <%= messages[i].star >= 2 ? 'active': '' %>"
-                          data-id="<%= messages[i]._id %>"></i>
-                        <i class="fa fa-star-o <%= messages[i].star >= 3 ? 'active': '' %>"
-                          data-id="<%= messages[i]._id %>"></i>
-                        <i class="fa fa-star-o <%= messages[i].star >= 4 ? 'active': '' %>"
-                          data-id="<%= messages[i]._id %>"></i>
-                        <i class="fa fa-star-o <%= messages[i].star >= 5 ? 'active': '' %>"
-                          data-id="<%= messages[i]._id %>"></i>
+                        <i class="fa fa-star-o <%= restaurants[i].star >= 1 ? 'active': '' %>"
+                          data-id="<%= restaurants[i]._id %>"></i>
+                        <i class="fa fa-star-o <%= restaurants[i].star >= 2 ? 'active': '' %>"
+                          data-id="<%= restaurants[i]._id %>"></i>
+                        <i class="fa fa-star-o <%= restaurants[i].star >= 3 ? 'active': '' %>"
+                          data-id="<%= restaurants[i]._id %>"></i>
+                        <i class="fa fa-star-o <%= restaurants[i].star >= 4 ? 'active': '' %>"
+                          data-id="<%= restaurants[i]._id %>"></i>
+                        <i class="fa fa-star-o <%= restaurants[i].star >= 5 ? 'active': '' %>"
+                          data-id="<%= restaurants[i]._id %>"></i>
                       </div>
 
                       <!-- Ayman helped me with this code (end) -->
 
                       <p class="msg">
-                        <%= messages[i].msg %>
+                        <%= restaurants[i].msg %>
                       </p>
                       <div class="type-date">
                         <div class="type-box">
                           <span>Cuisine:</span>
                           <span class="type">
-                            <%= messages[i].type %>
+                            <%= restaurants[i].type %>
                           </span>
                         </div>
                         <div class="date-box">
                           <span>Last Visit:</span>
                           <span class="lastVisited">
-                            <%= messages[i].lastVisited %>
+                            <%= restaurants[i].lastVisited %>
                           </span>
                         </div>
                       </div>
 
                       <div class="options">
-                        <span><i class="fa fa-edit" aria-hidden="true" data-id="<%= messages[i]._id %>"></i></span>
-                        <span><i class="fa fa-trash-o" aria-hidden="true" data-id="<%= messages[i]._id %>"></i></span>
+                        <span><i class="fa fa-edit" aria-hidden="true" data-id="<%= restaurants[i]._id %>"></i></span>
+                        <span><i class="fa fa-trash-o" aria-hidden="true" data-id="<%= restaurants[i]._id %>"></i></span>
                       </div>
-                      <div class="editing hidden" id="editing_<%= messages[i]._id %>">
+                      <div class="editing hidden" id="editing_<%= restaurants[i]._id %>">
                         <h4>Update A Restaurant Entry</h4>
                         <% if (user.local.email) { %>
-                          <form action="/messages/update?_method=PUT" method="POST">
+                          <form action="/restaurants/update?_method=PUT" method="POST">
                             <div class="res-input-b">
                               <div class="edit-input">
-                                <input type="hidden" name="id" value="<%= messages[i]._id %>">
-                                <input type="text" value="<%= messages[i].name %>" placeholder="restaurant"
+                                <input type="hidden" name="id" value="<%= restaurants[i]._id %>">
+                                <input type="text" value="<%= restaurants[i].name %>" placeholder="restaurant"
                                   name="updateName">
-                                <input type="date" value="<%= messages[i].lastVisited %>" name="updateLastVisited">
-                                <input type="text" value="<%= messages[i]._type %>" placeholder="type of cuisine"
+                                <input type="date" value="<%= restaurants[i].lastVisited %>" name="updateLastVisited">
+                                <input type="text" value="<%= restaurants[i]._type %>" placeholder="type of cuisine"
                                   name="updateType">
                               </div>
                               <textarea rows="5" cols="50" placeholder="Leave a quick review..."
-                                name="updateMsg"><%= messages[i].msg %></textarea>
+                                name="updateMsg"><%= restaurants[i].msg %></textarea>
                               <button type="submit">Submit</button>
                             </div>
                           </form>
