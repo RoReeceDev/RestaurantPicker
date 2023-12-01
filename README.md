@@ -9,6 +9,8 @@ Are you tired of the eternal question of what's for dinner? Look no further! Wha
 
 **Link to project:** 
 
+https://wfdb.up.railway.app/
+
 **Screenshot:**
 
 ![WFDB Gif](public/img/WFDB.gif)
