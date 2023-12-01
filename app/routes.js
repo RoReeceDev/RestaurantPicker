@@ -11,7 +11,7 @@ module.exports = function (app, passport, db) {
 
   // PROFILE SECTION =========================
   app.get('/profile', isLoggedIn, function (req, res) {
-    db.collection('restaurants').find().sort({ star: -1 }).toArray((err, result) => {
+    db.collection('restaurants').find({user: req.user._id}).sort({ star: -1 }).toArray((err, result) => {
       if (err) return console.log(err);
       res.render('profile.ejs', {
         user: req.user,
@@ -43,7 +43,7 @@ module.exports = function (app, passport, db) {
   // restaurant routes ===============================================================
 
   app.post('/restaurants', (req, res) => {
-    db.collection('restaurants').insertOne({ name: req.body.name, msg: req.body.msg, type: req.body.type, lastVisited: req.body.lastVisited, star: 0 }, (err, result) => {
+    db.collection('restaurants').insertOne({ name: req.body.name, msg: req.body.msg, type: req.body.type, lastVisited: req.body.lastVisited, star: 0, user: req.user._id }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
       res.redirect('/profile')
